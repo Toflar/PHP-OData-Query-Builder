@@ -2,6 +2,7 @@
 
 namespace ODataQueryBuilder;
 
+use ODataQueryBuilder\Helpers\OperandFormatter;
 use ODataQueryBuilder\Helpers\SimpleOrderByBuilder;
 use ODataQueryBuilder\Helpers\OrderByHelperStart;
 use ODataQueryBuilder\Helpers\SimpleFilterBuilder;
@@ -122,8 +123,8 @@ class ODataQueryBuilder {
     public function find($entityKey, bool $multiKey = false): ODataQueryBuilder {
         $entitySetKeys = array_keys($this->entitySets);
 
-        if (is_string($entityKey) && !$multiKey) {
-            $entityKey = '\'' . $entityKey . '\'';
+        if (!$multiKey) {
+            $entityKey = OperandFormatter::format($entityKey);
         }
         
         $this->entitySets[$entitySetKeys[$this->entitySetIndex]] = '(' . $entityKey . ')';

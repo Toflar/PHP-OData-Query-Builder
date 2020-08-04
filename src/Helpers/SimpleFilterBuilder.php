@@ -21,9 +21,7 @@ class SimpleFilterBuilder
 
     public function equals($rightOperand): ODataQueryBuilder
     {
-        if (is_string($rightOperand)) {
-            $rightOperand = '\'' . $rightOperand . '\'';
-        }
+        $rightOperand = OperandFormatter::format($rightOperand);
 
         $this->oDataQueryBuilder->addFilterString($this->leftOperand . ' eq ' . $rightOperand, $this->andOr);
 
@@ -32,9 +30,7 @@ class SimpleFilterBuilder
 
     public function notEquals($rightOperand): ODataQueryBuilder
     {
-        if (is_string($rightOperand)) {
-            $rightOperand = '\'' . $rightOperand . '\'';
-        }
+        $rightOperand = OperandFormatter::format($rightOperand);
 
         $this->oDataQueryBuilder->addFilterString($this->leftOperand . ' ne ' . $rightOperand, $this->andOr);
 
@@ -43,9 +39,7 @@ class SimpleFilterBuilder
 
     public function greaterThan($rightOperand): ODataQueryBuilder
     {
-        if (is_string($rightOperand)) {
-            $rightOperand = '\'' . $rightOperand . '\'';
-        }
+        $rightOperand = OperandFormatter::format($rightOperand);
 
         $this->oDataQueryBuilder->addFilterString($this->leftOperand . ' gt ' . $rightOperand, $this->andOr);
 
@@ -54,9 +48,7 @@ class SimpleFilterBuilder
 
     public function greaterThanOrEqual($rightOperand): ODataQueryBuilder
     {
-        if (is_string($rightOperand)) {
-            $rightOperand = '\'' . $rightOperand . '\'';
-        }
+        $rightOperand = OperandFormatter::format($rightOperand);
 
         $this->oDataQueryBuilder->addFilterString($this->leftOperand . ' ge ' . $rightOperand, $this->andOr);
 
@@ -65,9 +57,7 @@ class SimpleFilterBuilder
 
     public function lessThan($rightOperand): ODataQueryBuilder
     {
-        if (is_string($rightOperand)) {
-            $rightOperand = '\'' . $rightOperand . '\'';
-        }
+        $rightOperand = OperandFormatter::format($rightOperand);
 
         $this->oDataQueryBuilder->addFilterString($this->leftOperand . ' lt ' . $rightOperand, $this->andOr);
 
@@ -76,9 +66,7 @@ class SimpleFilterBuilder
 
     public function lessThanOrEqual($rightOperand): ODataQueryBuilder
     {
-        if (is_string($rightOperand)) {
-            $rightOperand = '\'' . $rightOperand . '\'';
-        }
+        $rightOperand = OperandFormatter::format($rightOperand);
 
         $this->oDataQueryBuilder->addFilterString($this->leftOperand . ' le ' . $rightOperand, $this->andOr);
 

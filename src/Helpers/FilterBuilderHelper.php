@@ -18,9 +18,7 @@ class FilterBuilderHelper
 
     public function equals($rightOperand): FilterBuilder
     {
-        if (is_string($rightOperand)) {
-            $rightOperand = '\'' . $rightOperand . '\'';
-        }
+        $rightOperand = OperandFormatter::format($rightOperand);
 
         $this->filterBuilder->append($this->leftOperand . ' eq ' . $rightOperand);
 
@@ -33,9 +31,7 @@ class FilterBuilderHelper
 
     public function notEquals($rightOperand): FilterBuilder
     {
-        if (is_string($rightOperand)) {
-            $rightOperand = '\'' . $rightOperand . '\'';
-        }
+        $rightOperand = OperandFormatter::format($rightOperand);
 
         $this->filterBuilder->append($this->leftOperand . ' ne ' . $rightOperand);
 
@@ -48,9 +44,7 @@ class FilterBuilderHelper
 
     public function greaterThan($rightOperand): FilterBuilder
     {
-        if (is_string($rightOperand)) {
-            $rightOperand = '\'' . $rightOperand . '\'';
-        }
+        $rightOperand = OperandFormatter::format($rightOperand);
 
         $this->filterBuilder->append($this->leftOperand . ' gt ' . $rightOperand);
 
@@ -63,9 +57,7 @@ class FilterBuilderHelper
 
     public function greaterThanOrEqual($rightOperand): FilterBuilder
     {
-        if (is_string($rightOperand)) {
-            $rightOperand = '\'' . $rightOperand . '\'';
-        }
+        $rightOperand = OperandFormatter::format($rightOperand);
 
         $this->filterBuilder->append($this->leftOperand . ' ge ' . $rightOperand);
 
@@ -78,9 +70,7 @@ class FilterBuilderHelper
 
     public function lessThan($rightOperand): FilterBuilder
     {
-        if (is_string($rightOperand)) {
-            $rightOperand = '\'' . $rightOperand . '\'';
-        }
+        $rightOperand = OperandFormatter::format($rightOperand);
 
         $this->filterBuilder->append($this->leftOperand . ' lt ' . $rightOperand);
 
@@ -93,9 +83,7 @@ class FilterBuilderHelper
 
     public function lessThanOrEqual($rightOperand): FilterBuilder
     {
-        if (is_string($rightOperand)) {
-            $rightOperand = '\'' . $rightOperand . '\'';
-        }
+        $rightOperand = OperandFormatter::format($rightOperand);
 
         $this->filterBuilder->append($this->leftOperand . ' le ' . $rightOperand);
 
@@ -124,11 +112,7 @@ class FilterBuilderHelper
         $this->filterBuilder->append($this->leftOperand . ' in (');
 
         $rightOperand = array_map(function ($value) {
-            if (is_string($value)) {
-                return '\'' . $value . '\'';
-            }
-
-            return $value;
+            return OperandFormatter::format($value);
         }, $rightOperand);
 
         $this->filterBuilder->append(implode(', ', $rightOperand));
