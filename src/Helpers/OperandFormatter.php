@@ -20,6 +20,10 @@ class OperandFormatter
             return '\'' . $operand . '\'';
         }
 
+        if (\is_bool($operand)) {
+            return $operand ? 'true' : 'false';
+        }
+
         return $operand;
     }
 }
