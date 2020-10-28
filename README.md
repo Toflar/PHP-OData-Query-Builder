@@ -21,4 +21,14 @@ $builder->from('Books')->filter('Cost')->lessThan(20)->buildQuery();
 $builder->from('People')->filter('LastName')->equals('Smith')->buildQuery();
 $builder->from('People')->filter('LastName')->equals('Smith')->andFilter('FirstName')->equals('Joe')->buildQuery();
 ```
+
+By default, string operands are quoted using `'` which prevents you from comparing e.g.
+two field values with each other.
+In that case, make use of the `RawOperand` class or use your own implementation of the
+`OperandInterface`:
+
+```php
+$builder->from('People')->filter('LastName')->equals(new RawOperand('Firstname'))->buildQuery();
+```
+
 Please view the test cases for more complex examples.

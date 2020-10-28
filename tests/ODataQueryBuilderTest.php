@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use ODataQueryBuilder\Operand\RawOperand;
 use PHPUnit\Framework\TestCase;
 use ODataQueryBuilder\ODataQueryBuilder;
 
@@ -354,6 +355,23 @@ final class ODataQueryBuilderTest extends TestCase {
 
         $this->assertEquals(
             'http://services.odata.org/V4/TripPinService/People?$filter=LastName in (\'Smith\', \'Whyte\') and Age in (28, 42)',
+            $query
+        );
+    }
+
+    public function testRawOperand() {
+
+        $builder = new ODataQueryBuilder('http://services.odata.org/V4/TripPinService/');
+
+        $query = $builder->from('People')
+            ->filterBuilder()
+            ->where('LastName')->equals(new RawOperand('FirstName'))
+            ->addToQuery()
+            ->encodeUrl(false)
+            ->buildQuery();
+
+        $this->assertEquals(
+            'http://services.odata.org/V4/TripPinService/People?$filter=LastName eq FirstName',
             $query
         );
     }
